@@ -19,18 +19,35 @@ for (const og of galleryItems) {
     img.dataset.source = og.original;
     img.alt = og.description;
     a.append(img);
+}
 
-    gallery.querySelector("div.gallery__item").onclick = () => {
-        preventDefault();
-      basicLightbox
+gallery.onclick = (event) => {
+     
+    if (event.target.nodeName !== "IMG") return;
+     event.preventDefault();
+     const instance = basicLightbox
         .create(
           `
-		<img width="1400" height="900" src="${og.original}">
-	`
-        )
-        .show();
+		<img width="1400" height="900" src="${event.target.dataset.source}"}>
+	`, {
+                onShow: (instance) => {
+         
+            document.addEventListener("keydown", function (event) {
+              if (event.key === "Escape") {
+             
+                 
+                  instance.close();
+              }
+            });
+          
+        }
+    }
+     );
+   
+          instance.show();
     };
-}
+
+
 
 
 
