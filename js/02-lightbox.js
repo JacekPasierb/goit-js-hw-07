@@ -6,20 +6,19 @@ console.log(galleryItems);
 
 const gallery = document.querySelector(".gallery");
 
-for (const objectGallery of galleryItems){
+galleryItems.forEach((element) => {
 
-    let a = document.createElement("a");
-    a.classList.add("gallery__item");
-    a.href = objectGallery.original;
-    gallery.append(a);
+  let a = document.createElement("a");
+  a.classList.add("gallery__item");
+  a.href = element.original;
+  gallery.append(a);
 
-    let img = document.createElement("img");
-    img.classList.add("gallery__image");
-    img.src = objectGallery.preview;
-    img.alt = objectGallery.description;
-    a.append(img);
-
-}
+  let img = document.createElement("img");
+  img.classList.add("gallery__image");
+  img.src = element.preview;
+  img.alt = element.description;
+  a.append(img);
+});
 
 
 const options = {
@@ -27,4 +26,5 @@ const options = {
   captionsData: "alt",
   captionDelay: 250,
 };
- gallery = new SimpleLightbox(".gallery a",options);
+let InstanceGallery = new SimpleLightbox(".gallery a", options);
+ 
